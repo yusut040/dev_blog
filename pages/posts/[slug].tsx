@@ -1,6 +1,11 @@
 import React from 'react';
 import { getSinglePost,getAllPosts } from "../../lib/notionAPI";
 import Markdown from 'react-markdown';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import remarkGfm from 'remark-gfm'
+import Link from 'next/link';
+
 
 // eslint-disable-next-line @next/next/no-typos
 export const getStaticPaths = async() => {
@@ -17,14 +22,13 @@ export const getStaticProps = async ({ params }) => {
     const post = await getSinglePost(params.slug);    
     return{
       props: {
-        post,
+        post: post,
       },
       revalidate: 60,
     };
   };
 
 const post = ({post}) => {
-
     return(
         <section className="container lg:px-2 px-5 h-screen lg:w-2/5 mx-auto mt-20">
             <h2 className="w-full text-2xl font-medium">{post.metadata.title}</h2>
@@ -35,11 +39,36 @@ const post = ({post}) => {
                 <p key={tag} className='text-white bg-sky-900 rounded-xl font-medium mt-2 px-2 inline-block mr-2'>{tag}</p>
               ))}
             <div className="mt-10 font-medium">
-              <Markdown
-                children={post.markdown.parent}
-              />
-            </div>
-        </section>
+            <Markdown
+              children={post.markdown.parent}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code(props) {
+                  const {children, className, node,...rest} = props
+                  const match = /language-(\w+)/.exec(className || "")
+                  return match ? (
+                    <SyntaxHighlighter
+                      {...rest}
+                      PreTag="div"
+                      children={String(children).replace(/\n$/, "")}
+                      language={match[1]}
+                      style={vscDarkPlus}
+                    />
+                  ) : (
+                    <code {...rest} className={className}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            >
+              {post.markdown.parent}
+            </Markdown>
+            <Link href="/">
+              <span className='pd-20 block mt-3 hover:text-blue-500 block'>←ホームに戻る</span>
+            </Link>
+          </div>
+      </section>
     )
 }
 

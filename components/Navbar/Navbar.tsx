@@ -14,10 +14,10 @@ function Navbar() {
                         <Link href="/" className='block px-4 py-2 hover:text-sky-900 transition-all duration-300'>Home</Link>
                     </li>
                     <li>
-                        <Link href="/" className='block px-4 py-2 hover:text-sky-900 transition-all duration-300'>X</Link>
+                        <Link href="#" className='block px-4 py-2 hover:text-sky-900 transition-all duration-300'>X</Link>
                     </li>
                     <li>
-                        <Link href="/" className='block px-4 py-2 hover:text-sky-900 transition-all duration-300'>Instagram</Link>
+                        <Link href="#" className='block px-4 py-2 hover:text-sky-900 transition-all duration-300'>Instagram</Link>
                     </li>
                 </ul>
             </div>
