@@ -1,6 +1,7 @@
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/constants/constants";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
+import { Tags } from "./../interface/index";
 
 const notion = new Client({
     auth: process.env.NOTION_TOKEN as string,
@@ -8,21 +9,51 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion});
 
+interface Post {
+    id: string
+    properties: {
+        名前:{
+            title:[{
+                plain_text: string
+            }]
+        },
+        description: {
+            rich_text: string[]
+        },
+        Date:{
+            rich_text: Array<{
+                plain_text: string
+            }>
+        }
+        Slug:{
+            rich_text: Array<{
+                plain_text: string
+            }>
+        }
+        タグ:{
+            multi_select: Array<{
+                id:string
+                name:string
+                color:string
+            }>
+        }
+    }
+}
+
 export const getAllPosts = async () => {
     const posts = await notion.databases.query({
         database_id: process.env.NOTION_DATABASE_ID as string,
         page_size: 100,
     });
-
     const allPosts = posts.results;
-
+    console.log(allPosts);
     return allPosts.map((post) =>{
         return getPageMetaData(post);
     });
 };
 
-const getPageMetaData = (post) =>{
-    const getTags = (tags) =>{
+const getPageMetaData = (post:Post) =>{
+    const getTags = (tags: Array<Tags>) =>{
         const allTags = tags.map((tag) =>{
             return tag.name;
         });

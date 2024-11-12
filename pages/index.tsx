@@ -3,7 +3,6 @@ import { getPostForTop } from "../lib/notionAPI";
 import Link from 'next/link';
 
 export const getStaticProps = async () => {
-  //引数で表示させる記事数をコントロールできる（レイアウト編集時使用）
   const fourPosts = await getPostForTop();
   return{
     props: {
@@ -13,16 +12,8 @@ export const getStaticProps = async () => {
   };
 };
 
-type Posts = {
-  id: string
-  title: string
-  description: any
-  tags: string []
-  date: string
-  slug: string
-}
 
-export default function Home({fourPosts}: {fourPosts: Array<Posts>}) {
+export default function Home({fourPosts}: {fourPosts}) {
   return (
       <div className="container h-full w-full mx-auto">
         <main className="container w-full mt-16">

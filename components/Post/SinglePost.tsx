@@ -10,11 +10,10 @@ type Props = {
     tags: string[]
     slug: string
     isPagenationPage: boolean
-  }
+}
 
 function SinglePost(props: Props) {
   const {title,description,date,tags,slug,isPagenationPage} = props;
-  console.log(description);
   if(!isPagenationPage){
     return (
       <>

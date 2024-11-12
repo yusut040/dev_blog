@@ -4,7 +4,6 @@ import Pagenation from "@/components/Pagenation/Pagenation";
 
 export const getStaticPaths = async() => {
   const numberOfPage = await getNumberOfPages();
-  
   const params = [];
 
   for (let i = 1; i<= numberOfPage; i++) {
@@ -30,23 +29,13 @@ export const getStaticProps = async (context) => {
   };
 };
 
-type Posts = {
-  id: string
-  title: string
-  description: any
-  tags: string []
-  date: string
-  slug: string
-  isPagenationPage: boolean
-}
-
 const blogPageList = ({postByPage,numberOfPage}) => {
   return (
       <div className="container h-full w-full mx-auto">
         <main className="container w-full mt-16">
           <h1 className="text-4xl font-medium text-center mb-16">投稿一覧</h1>
           <section className="sm:grid grid-cols-2 w-5/6 gap-3 mx-auto" >
-            {postByPage.map((post:Posts)=>(
+            {postByPage.map((post)=>(
               <div key={post.id}>
                 <SinglePost 
                 title={post.title}

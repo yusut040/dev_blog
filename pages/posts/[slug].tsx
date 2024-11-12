@@ -6,8 +6,6 @@ import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import remarkGfm from 'remark-gfm'
 import Link from 'next/link';
 
-
-// eslint-disable-next-line @next/next/no-typos
 export const getStaticPaths = async() => {
   const allPosts = await getAllPosts();
   const paths = allPosts.map(({slug}) => ({params: { slug } }));
