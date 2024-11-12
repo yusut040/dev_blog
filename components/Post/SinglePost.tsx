@@ -3,7 +3,9 @@ import Link from "next/link";
 
 type Props = {
     title: string
-    description: string
+    description: {
+      plain_text:string
+    }
     date: string
     tags: string[]
     slug: string
@@ -12,7 +14,7 @@ type Props = {
 
 function SinglePost(props: Props) {
   const {title,description,date,tags,slug,isPagenationPage} = props;
-  
+  console.log(description);
   if(!isPagenationPage){
     return (
       <>
