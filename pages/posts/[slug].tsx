@@ -40,22 +40,21 @@ const post = ({post}) => {
               ))}
             <div className="mt-10 font-medium">
             <Markdown
-              children={post.markdown.parent}
               remarkPlugins={[remarkGfm]}
               components={{
                 code(props) {
-                  const {children, className, node,...rest} = props
+                  const {children, className} = props
                   const match = /language-(\w+)/.exec(className || "")
                   return match ? (
                     <SyntaxHighlighter
-                      {...rest}
                       PreTag="div"
+                      // eslint-disable-next-line react/no-children-prop
                       children={String(children).replace(/\n$/, "")}
                       language={match[1]}
                       style={vscDarkPlus}
                     />
                   ) : (
-                    <code {...rest} className={className}>
+                    <code className={className}>
                       {children}
                     </code>
                   )

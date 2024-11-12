@@ -1,8 +1,6 @@
-import { getAllPosts } from "@/lib/notionAPI";
 import SinglePost from "../components/Post/SinglePost";
 import { getPostForTop } from "../lib/notionAPI";
 import Link from 'next/link';
-import NUMBER_OF_POSTS_PER_PAGE from "./../constants/constants";
 
 export const getStaticProps = async () => {
   //引数で表示させる記事数をコントロールできる（レイアウト編集時使用）
@@ -14,16 +12,6 @@ export const getStaticProps = async () => {
     revalidate: 60,
   };
 };
-
-// export const getStaticProps = async () => {
-//   const allPosts = await getAllPosts();
-//   return{
-//     props: {
-//       allPosts,
-//     },
-//     revalidate: 60,
-//   };
-// };
 
 type Posts = {
   id: string

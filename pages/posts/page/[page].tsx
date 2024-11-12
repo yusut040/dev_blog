@@ -1,4 +1,4 @@
-import { getAllPosts, getNumberOfPages, getPostsByPage } from "@/lib/notionAPI";
+import { getNumberOfPages, getPostsByPage } from "@/lib/notionAPI";
 import SinglePost from "../../../components/Post/SinglePost";
 import { getPostForTop } from "../../../lib/notionAPI";
 import Pagenation from "@/components/Pagenation/Pagenation";
@@ -6,7 +6,7 @@ import Pagenation from "@/components/Pagenation/Pagenation";
 export const getStaticPaths = async() => {
   const numberOfPage = await getNumberOfPages();
   
-  let params = [];
+  const params = [];
 
   for (let i = 1; i<= numberOfPage; i++) {
     params.push({ params:{ page: i.toString() } });
@@ -42,9 +42,6 @@ type Posts = {
 }
 
 const blogPageList = ({postByPage,numberOfPage}) => {
-  //console.log(postByPage);
-  //console.log(numberOfPage);
-
   return (
       <div className="container h-full w-full mx-auto">
         <main className="container w-full mt-16">
