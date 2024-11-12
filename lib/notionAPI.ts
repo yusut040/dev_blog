@@ -11,14 +11,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion});
 interface Post {
     id: string
     properties: {
-        名前:{
-            title:[{
-                plain_text: string
-            }]
-        },
+        名前: {
+            title:{plain_text: string}[];
+        };
         description: {
-            rich_text: string[]
-        },
+            rich_text: { plain_text: string }[];
+        };
         Date:{
             rich_text: Array<{
                 plain_text: string
@@ -52,7 +50,7 @@ export const getAllPosts = async () => {
     });
     const allPosts = posts.results;
     return allPosts.map((post) =>{
-        return getPageMetaData(post);
+        return getPageMetaData(post as unknown as Post);
     });
 };
 
@@ -88,7 +86,7 @@ export const getSinglePost = async (slug) =>{
 
     //記事のメタデータを取得する
     const page = response.results[0];
-    const metadata = getPageMetaData(page);
+    const metadata = getPageMetaData(page as unknown as Post);
 
     //記事内の記述をマークダウン形式で取得してString変換する。
     const mdblocks = await n2m.pageToMarkdown(page.id);
