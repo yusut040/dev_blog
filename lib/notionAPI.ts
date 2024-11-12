@@ -74,7 +74,6 @@ export const getPostForTop = async () => {
 /* ページ番号に応じた記事を出力する。*/
 export const getPostsByPage = async (page: number) => {
     const allPosts = await getAllPosts();
-    await console.log(allPosts);
     const startIndex = (page - 1 ) * NUMBER_OF_POSTS_PER_PAGE;
     const endIndex = startIndex + NUMBER_OF_POSTS_PER_PAGE;
     
@@ -83,9 +82,5 @@ export const getPostsByPage = async (page: number) => {
 
 export const getNumberOfPages = async () => {
     const allPosts = await getAllPosts();
-    return Math.floor(allPosts.length / NUMBER_OF_POSTS_PER_PAGE) +
-        (allPosts.length % NUMBER_OF_POSTS_PER_PAGE) >
-        0
-        ? 1
-        : 0;
+    return Math.floor(allPosts.length / NUMBER_OF_POSTS_PER_PAGE) + (allPosts.length % NUMBER_OF_POSTS_PER_PAGE > 0 ? 1 : 0);
 };
