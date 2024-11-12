@@ -1,7 +1,6 @@
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/constants/constants";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-import { Tags } from "@/interface/index";
 
 const notion = new Client({
     auth: process.env.NOTION_TOKEN as string,
@@ -38,6 +37,12 @@ interface Post {
             }>
         }
     }
+}
+
+interface Tags {
+    id: string
+    name: string
+    color: string
 }
 
 export const getAllPosts = async () => {
