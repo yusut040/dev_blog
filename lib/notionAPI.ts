@@ -1,7 +1,7 @@
 import { NUMBER_OF_POSTS_PER_PAGE } from "@/constants/constants";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
-import { Tags } from "./../interface/index";
+import { Tags } from "@/interface/index";
 
 const notion = new Client({
     auth: process.env.NOTION_TOKEN as string,
@@ -46,7 +46,6 @@ export const getAllPosts = async () => {
         page_size: 100,
     });
     const allPosts = posts.results;
-    console.log(allPosts);
     return allPosts.map((post) =>{
         return getPageMetaData(post);
     });
