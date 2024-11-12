@@ -16,9 +16,7 @@ export const getStaticProps = async () => {
 type Posts = {
   id: string
   title: string
-  description: {
-    plain_text:string
-  }
+  description: any
   tags: string []
   date: string
   slug: string
