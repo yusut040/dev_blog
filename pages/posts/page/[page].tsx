@@ -1,6 +1,6 @@
 import { getNumberOfPages, getPostsByPage } from "@/lib/notionAPI";
-import SinglePost from "../../../components/Post/SinglePost";
-import Pagenation from "../../../components/Pagenation/Pagenation";
+import SinglePost from "@/components/Post/SinglePost";
+import Pagenation from "@/components/Pagenation/Pagenation";
 
 export const getStaticPaths = async() => {
   const numberOfPage = await getNumberOfPages();
@@ -14,7 +14,6 @@ export const getStaticPaths = async() => {
         fallback: "blocking",
     }
   }
-
 
 export const getStaticProps = async (context) => {
   const currentPage = context.params?.page;
