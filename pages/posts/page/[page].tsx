@@ -1,6 +1,6 @@
 import { getNumberOfPages, getPostsByPage } from "@/lib/notionAPI";
 import SinglePost from "@/components/Post/SinglePost";
-import Pagenation from "@/components/Pagenation/Pagenation";
+import Pagenation from "@/components/Pgnation/Pagenation";
 
 export const getStaticPaths = async() => {
   const numberOfPage = await getNumberOfPages();
