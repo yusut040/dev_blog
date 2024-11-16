@@ -3,7 +3,7 @@ import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 
 const notion = new Client({
-    auth: process.env.NOTION_TOKEN as string,
+    auth: process.env.REACT_APP_NOTION_TOKEN as string,
 });
 
 const n2m = new NotionToMarkdown({ notionClient: notion});
@@ -45,7 +45,7 @@ interface Tags {
 
 export const getAllPosts = async () => {
     const posts = await notion.databases.query({
-        database_id: process.env.NOTION_DATABASE_ID as string,
+        database_id: process.env.REACT_APP_NOTION_DATABASE_ID as string,
         page_size: 100,
     });
     const allPosts = posts.results;
